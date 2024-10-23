@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 
 const Row = ({ index }) => (
-  <div className={index % 2 ? "ListItemOdd" : "ListItemEven"}>Row {index}</div>
+  <div
+    className={`${
+      index % 2 ? "RegularListItemEven" : "ListItemOdd"
+    } h-32 p-4 border-x-[1px] `}
+  >
+    不使用 List Virtualization 的 Row {index}
+  </div>
 );
 
 Row.propTypes = {
@@ -10,9 +16,9 @@ Row.propTypes = {
 
 const UsingRegularList = ({ itemCount }) => {
   return (
-    <div className="h-4 w-24">
+    <div className="h-full w-full  ">
       {Array.from({ length: itemCount }, (_, index) => (
-        <Row key={index} index={index} />
+        <Row key={index} index={index + 1} />
       ))}
     </div>
   );

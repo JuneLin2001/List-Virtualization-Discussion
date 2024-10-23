@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Row = ({ index, style }) => (
   <div className={index % 2 ? "ListItemOdd" : "ListItemEven"} style={style}>
-    Row {index}
+    使用 List Virtualization 的 Row {index + 1}
   </div>
 );
 Row.propTypes = {
@@ -21,7 +21,7 @@ const UsingListVirtualization = ({ itemCount }) => {
             className="List"
             height={height}
             itemCount={itemCount}
-            itemSize={400}
+            itemSize={96}
             width={width}
           >
             {Row}
