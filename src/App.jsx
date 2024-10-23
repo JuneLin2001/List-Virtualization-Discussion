@@ -3,8 +3,14 @@ import "../src/index.css";
 import UsingListVirtualization from "./UsingListVirtualization";
 import UsingRegularList from "./UsingRegularList";
 import Selector from "./Selector";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+
+const images = [
+  "maxwell-cat.gif",
+  "7470e23200353f231999a1bcf1fa7342.gif",
+  "waTurtle.svg",
+];
 
 // Row 組件
 const Row = ({ index, isVirtualized }) => {
@@ -13,17 +19,35 @@ const Row = ({ index, isVirtualized }) => {
     ? `這是一條使用 List Virtualization 的留言內容 ${index + 1}`
     : `這是一條不使用 List Virtualization 的留言內容 ${index + 1}`;
 
+  // 隨機選擇一個頭像
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setImageUrl(images[randomIndex]);
+  }, [index]);
+
   return (
     <div
       className={`flex p-4 border-b last:border-b-0 mb-1 ${
         isVirtualized ? "bg-VirtualizationListItem" : "bg-RegularListItem"
       }`}
     >
-      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
-        <span className="text-lg font-semibold text-white">
-          {userName.charAt(0)}
-        </span>{" "}
-        {/* 顯示使用者的首字母 */}
+      <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden">
+        {/* 使用圖片顯示頭像 */}
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={userName}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+            <span className="text-lg font-semibold text-white">
+              {userName.charAt(0)}
+            </span>
+          </div>
+        )}
       </div>
       <div className="ml-4 flex-grow">
         <div className="text-sm font-semibold">{userName}</div>
@@ -31,11 +55,6 @@ const Row = ({ index, isVirtualized }) => {
       </div>
     </div>
   );
-};
-
-Row.propTypes = {
-  index: PropTypes.number.isRequired,
-  isVirtualized: PropTypes.bool.isRequired,
 };
 
 Row.propTypes = {
