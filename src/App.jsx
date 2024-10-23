@@ -7,7 +7,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { generateRandomUsers } from "./userGenerator";
 
-const Row = ({ user, isVirtualized }) => {
+const Row = ({ index, user, isVirtualized }) => {
   return (
     <div
       className={`flex p-4 border-b last:border-b-0 mb-1 ${
@@ -23,13 +23,17 @@ const Row = ({ user, isVirtualized }) => {
       </div>
       <div className="ml-4 flex-grow">
         <div className="text-sm font-semibold">{user.username}</div>
-        <div className="text-sm text-gray-700">{user.sentence}</div>
+        <div className="text-sm text-gray-700 flex justify-between">
+          {user.sentence}{" "}
+          <span className="text-sm text-gray-500">#{index + 1}</span>
+        </div>
       </div>
     </div>
   );
 };
 
 Row.propTypes = {
+  index: PropTypes.number.isRequired,
   user: PropTypes.object.isRequired,
   isVirtualized: PropTypes.bool.isRequired,
 };
