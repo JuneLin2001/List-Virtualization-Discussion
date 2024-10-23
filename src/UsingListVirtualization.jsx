@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { FixedSizeList as List } from "react-window";
 import { useRef, useEffect, useState } from "react";
 
-const UsingListVirtualization = ({ itemCount, Row }) => {
+const UsingListVirtualization = ({ itemCount, Row, users }) => {
   const listRef = useRef();
   const [height, setHeight] = useState(0);
 
@@ -27,7 +27,7 @@ const UsingListVirtualization = ({ itemCount, Row }) => {
         <List height={height} itemCount={itemCount} itemSize={64} width="100%">
           {({ index, style }) => (
             <div style={style}>
-              <Row index={index} isVirtualized={true} />
+              <Row index={index} isVirtualized={true} user={users[index]} />
             </div>
           )}
         </List>
@@ -39,6 +39,7 @@ const UsingListVirtualization = ({ itemCount, Row }) => {
 UsingListVirtualization.propTypes = {
   itemCount: PropTypes.number.isRequired,
   Row: PropTypes.elementType.isRequired,
+  users: PropTypes.array.isRequired,
 };
 
 export default UsingListVirtualization;

@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
 
-const UsingRegularList = ({ itemCount, Row }) => {
+const UsingRegularList = ({ itemCount, Row, users }) => {
   return (
-    <div className="h-full w-full">
-      {Array.from({ length: itemCount }, (_, index) => (
-        <Row key={index} index={index} isVirtualized={false} />
+    <div>
+      {Array.from({ length: itemCount }).map((_, index) => (
+        <Row
+          key={index}
+          index={index}
+          isVirtualized={false}
+          user={users[index]}
+        />
       ))}
     </div>
   );
@@ -13,6 +18,7 @@ const UsingRegularList = ({ itemCount, Row }) => {
 UsingRegularList.propTypes = {
   itemCount: PropTypes.number.isRequired,
   Row: PropTypes.elementType.isRequired,
+  users: PropTypes.array.isRequired,
 };
 
 export default UsingRegularList;

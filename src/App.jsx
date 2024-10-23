@@ -3,30 +3,11 @@ import "../src/index.css";
 import UsingListVirtualization from "./UsingListVirtualization";
 import UsingRegularList from "./UsingRegularList";
 import Selector from "./Selector";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
+import { generateRandomUsers } from "./userGenerator";
 
-const images = [
-  "maxwell-cat.gif",
-  "7470e23200353f231999a1bcf1fa7342.gif",
-  "waTurtle.svg",
-];
-
-// Row 組件
-const Row = ({ index, isVirtualized }) => {
-  const userName = `使用者 ${index + 1}`;
-  const message = isVirtualized
-    ? `這是一條使用 List Virtualization 的留言內容 ${index + 1}`
-    : `這是一條不使用 List Virtualization 的留言內容 ${index + 1}`;
-
-  // 隨機選擇一個頭像
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * images.length);
-    setImageUrl(images[randomIndex]);
-  }, [index]);
-
+const Row = ({ user, isVirtualized }) => {
   return (
     <div
       className={`flex p-4 border-b last:border-b-0 mb-1 ${
@@ -34,37 +15,29 @@ const Row = ({ index, isVirtualized }) => {
       }`}
     >
       <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden">
-        {/* 使用圖片顯示頭像 */}
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            alt={userName}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="bg-gray-300 w-full h-full flex items-center justify-center">
-            <span className="text-lg font-semibold text-white">
-              {userName.charAt(0)}
-            </span>
-          </div>
-        )}
+        <img
+          src={user.avatar}
+          alt={user.username}
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="ml-4 flex-grow">
-        <div className="text-sm font-semibold">{userName}</div>
-        <div className="text-sm text-gray-700">{message}</div>
+        <div className="text-sm font-semibold">{user.username}</div>
+        <div className="text-sm text-gray-700">{user.sentence}</div>
       </div>
     </div>
   );
 };
 
 Row.propTypes = {
-  index: PropTypes.number.isRequired,
+  user: PropTypes.object.isRequired,
   isVirtualized: PropTypes.bool.isRequired,
 };
 
 const App = () => {
   const [tempItemCount, setTempItemCount] = useState(10);
   const [itemCount, setItemCount] = useState(10);
+  const [users, setUsers] = useState(generateRandomUsers(itemCount)); // 用來存儲用戶的狀態
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -75,6 +48,8 @@ const App = () => {
 
   const handleApplyCount = () => {
     setItemCount(tempItemCount);
+    // 當 itemCount 改變時，生成新的用戶
+    setUsers(generateRandomUsers(tempItemCount));
   };
 
   return (
@@ -134,12 +109,18 @@ const App = () => {
           <Route
             path="/UsingListVirtualization"
             element={
-              <UsingListVirtualization itemCount={itemCount} Row={Row} />
+              <UsingListVirtualization
+                itemCount={itemCount}
+                Row={Row}
+                users={users}
+              />
             }
           />
           <Route
             path="/UsingRegularList"
-            element={<UsingRegularList itemCount={itemCount} Row={Row} />}
+            element={
+              <UsingRegularList itemCount={itemCount} Row={Row} users={users} />
+            }
           />
         </Routes>
       </div>
