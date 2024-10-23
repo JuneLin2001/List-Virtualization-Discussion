@@ -32,14 +32,3 @@ body,
   align-items: center;
   justify-content: center;
 }
-
-.ListItemEven {
-  background-color: #f8f8f0;
-}
-
-.RegularListItemEven {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #d3e3fd;
-}

@@ -4,6 +4,44 @@ import UsingListVirtualization from "./UsingListVirtualization";
 import UsingRegularList from "./UsingRegularList";
 import Selector from "./Selector";
 import { useState } from "react";
+import PropTypes from "prop-types";
+
+// Row 組件
+const Row = ({ index, isVirtualized }) => {
+  const userName = `使用者 ${index + 1}`;
+  const message = isVirtualized
+    ? `這是一條使用 List Virtualization 的留言內容 ${index + 1}`
+    : `這是一條不使用 List Virtualization 的留言內容 ${index + 1}`;
+
+  return (
+    <div
+      className={`flex p-4 border-b last:border-b-0 mb-1 ${
+        isVirtualized ? "bg-VirtualizationListItem" : "bg-RegularListItem"
+      }`}
+    >
+      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+        <span className="text-lg font-semibold text-white">
+          {userName.charAt(0)}
+        </span>{" "}
+        {/* 顯示使用者的首字母 */}
+      </div>
+      <div className="ml-4 flex-grow">
+        <div className="text-sm font-semibold">{userName}</div>
+        <div className="text-sm text-gray-700">{message}</div>
+      </div>
+    </div>
+  );
+};
+
+Row.propTypes = {
+  index: PropTypes.number.isRequired,
+  isVirtualized: PropTypes.bool.isRequired,
+};
+
+Row.propTypes = {
+  index: PropTypes.number.isRequired,
+  isVirtualized: PropTypes.bool.isRequired,
+};
 
 const App = () => {
   const [tempItemCount, setTempItemCount] = useState(10);
@@ -75,16 +113,14 @@ const App = () => {
       <div className="right-panel w-2/3 p-4 overflow-y-auto border-[1px]">
         <Routes>
           <Route
-            path="/"
-            element={<UsingListVirtualization itemCount={itemCount} />}
-          />
-          <Route
             path="/UsingListVirtualization"
-            element={<UsingListVirtualization itemCount={itemCount} />}
+            element={
+              <UsingListVirtualization itemCount={itemCount} Row={Row} />
+            }
           />
           <Route
             path="/UsingRegularList"
-            element={<UsingRegularList itemCount={itemCount} />}
+            element={<UsingRegularList itemCount={itemCount} Row={Row} />}
           />
         </Routes>
       </div>

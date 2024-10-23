@@ -10,22 +10,30 @@ const Selector = () => {
       <label
         className={`p-4 rounded ${
           selectedListType === "virtualization"
-            ? "bg-[#f8f8f0] outline"
+            ? "bg-VirtualizationListItem outline"
             : "bg-white"
         } cursor-pointer`}
-        onClick={() => setSelectedListType("virtualization")}
       >
-        <Link to="/UsingListVirtualization" className="block">
+        <Link
+          to="/UsingListVirtualization"
+          onClick={() => setSelectedListType("virtualization")}
+          className="w-full h-full flex items-center"
+        >
           使用List Virtualization
         </Link>
       </label>
       <label
         className={`p-4 rounded ${
-          selectedListType === "regular" ? "bg-[#d3e3fd] outline" : "bg-white"
+          selectedListType === "regular"
+            ? "bg-RegularListItem outline"
+            : "bg-white"
         } cursor-pointer`}
-        onClick={() => setSelectedListType("regular")}
       >
-        <Link to="/UsingRegularList" className="block">
+        <Link
+          to="/UsingRegularList"
+          onClick={() => setSelectedListType("regular")}
+          className="w-full h-full flex items-center"
+        >
           不使用List Virtualization
         </Link>
       </label>

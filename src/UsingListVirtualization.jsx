@@ -1,38 +1,23 @@
-import { FixedSizeList as List } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
 import PropTypes from "prop-types";
+import { FixedSizeList as List } from "react-window";
 
-const Row = ({ index, style }) => (
-  <div className={index % 2 ? "ListItemOdd" : "ListItemEven"} style={style}>
-    使用 List Virtualization 的 Row {index + 1}
-  </div>
-);
-Row.propTypes = {
-  index: PropTypes.number.isRequired,
-  style: PropTypes.object.isRequired,
-};
-
-const UsingListVirtualization = ({ itemCount }) => {
+const UsingListVirtualization = ({ itemCount, Row }) => {
   return (
-    <>
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            className="List"
-            height={height}
-            itemCount={itemCount}
-            itemSize={96}
-            width={width}
-          >
-            {Row}
-          </List>
+    <div className="h-full w-full">
+      <List height={600} itemCount={itemCount} itemSize={64} width="100%">
+        {({ index, style }) => (
+          <div style={style}>
+            <Row index={index} isVirtualized={true} />
+          </div>
         )}
-      </AutoSizer>
-    </>
+      </List>
+    </div>
   );
 };
+
 UsingListVirtualization.propTypes = {
   itemCount: PropTypes.number.isRequired,
+  Row: PropTypes.elementType.isRequired,
 };
 
 export default UsingListVirtualization;
