@@ -7,7 +7,6 @@ const UsingListVirtualization = ({ itemCount, Row, users }) => {
   const listRef = useRef();
   const [height, setHeight] = useState(0);
 
-  // 使用 memoize 來緩存 users 的資料
   const createUserData = memoize((users) => users);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const UsingListVirtualization = ({ itemCount, Row, users }) => {
     };
   }, []);
 
-  const memoizedUsers = createUserData(users); // 緩存 users 資料
+  const memoizedUsers = createUserData(users);
 
   return (
     <div className="h-full w-full" ref={listRef}>

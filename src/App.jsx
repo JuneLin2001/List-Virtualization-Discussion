@@ -41,7 +41,7 @@ Row.propTypes = {
 const App = () => {
   const [tempItemCount, setTempItemCount] = useState(10);
   const [itemCount, setItemCount] = useState(10);
-  const [users, setUsers] = useState(generateRandomUsers(itemCount)); // 用來存儲用戶的狀態
+  const [users, setUsers] = useState(generateRandomUsers(itemCount));
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -52,17 +52,14 @@ const App = () => {
 
   const handleApplyCount = () => {
     setItemCount(tempItemCount);
-    // 當 itemCount 改變時，生成新的用戶
     setUsers(generateRandomUsers(tempItemCount));
   };
 
   return (
     <div className="app-container flex w-full h-screen">
-      {/* 左邊區塊 */}
       <div className="left-panel w-1/3 p-4 flex flex-col space-y-4">
         <h1 className="text-2xl font-bold">List Virtualization 都是個啥</h1>
 
-        {/* List Virtualization 的介紹 */}
         <section className="bg-gray-100 p-4 rounded-md shadow-md">
           <h2 className="text-xl font-semibold">
             List Virtualization 的運作原理
@@ -72,7 +69,6 @@ const App = () => {
           </p>
         </section>
 
-        {/* 什麼時候會用到 */}
         <section className="bg-gray-100 p-4 rounded-md shadow-md">
           <h2 className="text-xl font-semibold">什麼時候會用到</h2>
           <p className="mt-2">
@@ -85,7 +81,6 @@ const App = () => {
           </p>
         </section>
 
-        {/* 輸入與按鈕區塊 */}
         <div>
           <p>輸入個數字然後比較一下有無使用的差異：</p>
           <input
@@ -103,11 +98,9 @@ const App = () => {
           </button>
         </div>
 
-        {/* 選擇器 */}
         <Selector />
       </div>
 
-      {/* 右邊區塊 */}
       <div className="right-panel w-2/3 p-4 overflow-y-auto border-[1px]">
         <Routes>
           <Route
