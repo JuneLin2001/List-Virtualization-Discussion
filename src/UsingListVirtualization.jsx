@@ -24,7 +24,7 @@ const UsingListVirtualization = ({
         <List
           height={height}
           itemCount={itemCount}
-          itemSize={133}
+          itemSize={135}
           width={width}
         >
           {({ index, style }) => (
