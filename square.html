@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正方形生成器</title>
+    <style>
+      #square {
+        background-color: lightblue;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      這是一個簡單的繪製正方形功能，透過輸入一個超大的值（如100000000px），看實際大小會是幾px。
+    </h2>
+    <h3>輸入正方形的邊長</h3>
+    <input type="number" id="sizeInput" placeholder="輸入數字" />
+    <button onclick="generateSquare()">確定</button>
+    <div>目前正方形的寬度是：<span id="squareWidth"></span></div>
+
+    <div id="square"></div>
+
+    <script>
+      function generateSquare() {
+        const size = document.getElementById("sizeInput").value;
+        const square = document.getElementById("square");
+        const squareWidthDisplay = document.getElementById("squareWidth");
+
+        if (size > 0) {
+          // 設置正方形的寬度和高度
+          square.style.width = size + "px";
+          square.style.height = size + "px";
+          square.style.display = "block";
+
+          // 確保瀏覽器已經渲染出新的正方形尺寸
+          setTimeout(() => {
+            const actualWidth = square.offsetWidth;
+            squareWidthDisplay.textContent = `${actualWidth}px`;
+          }, 0);
+        } else {
+          alert("請輸入有效的數字");
+          square.style.display = "none";
+          squareWidthDisplay.textContent = "";
+        }
+      }
+    </script>
+  </body>
+</html>
