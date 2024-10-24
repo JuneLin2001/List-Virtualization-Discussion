@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { memo } from "react";
 
-const Row = React.memo(
+const Row = memo(
   ({ index, user, isLiked, toggleLike, isVirtualized }) => {
     return (
       <div
