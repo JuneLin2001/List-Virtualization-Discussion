@@ -13,10 +13,10 @@ const UsingRegularList = ({
         <Row
           key={index}
           index={index}
-          isVirtualized={false}
           user={users[index]}
           isLiked={likedItems[index]}
           toggleLike={toggleLike}
+          isVirtualized={false}
         />
       ))}
     </>
