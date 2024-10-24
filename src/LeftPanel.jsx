@@ -3,8 +3,8 @@ import { useState } from "react";
 import { generateRandomUsers } from "./utils/userGenerator";
 import PropTypes from "prop-types";
 
-const LeftPanel = ({ setItemCount, setUsers }) => {
-  const [tempItemCount, setTempItemCount] = useState(10);
+const LeftPanel = ({ itemCount, setItemCount, setUsers }) => {
+  const [tempItemCount, setTempItemCount] = useState(itemCount);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -65,6 +65,7 @@ const LeftPanel = ({ setItemCount, setUsers }) => {
 };
 
 LeftPanel.propTypes = {
+  itemCount: PropTypes.number.isRequired,
   setItemCount: PropTypes.func.isRequired,
   setUsers: PropTypes.func.isRequired,
 };

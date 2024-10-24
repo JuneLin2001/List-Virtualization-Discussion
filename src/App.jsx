@@ -24,7 +24,7 @@ const Row = ({ index, user, isVirtualized }) => {
       <div className="ml-4 flex-grow">
         <div className="text-sm font-semibold">{user.username}</div>
         <div className="text-sm text-gray-700 flex justify-between">
-          {user.sentence}{" "}
+          {user.sentence}
           <span className="text-sm text-gray-500">#{index + 1}</span>
         </div>
       </div>
@@ -39,13 +39,17 @@ Row.propTypes = {
 };
 
 const App = () => {
-  const [itemCount, setItemCount] = useState(10);
+  const [itemCount, setItemCount] = useState(5);
   const [users, setUsers] = useState(generateRandomUsers(itemCount));
 
   return (
-    <div className="app-container flex w-full h-screen">
-      <LeftPanel setItemCount={setItemCount} setUsers={setUsers} />
-      <div className="right-panel w-2/3 p-4 overflow-y-auto border-[1px]">
+    <div className="flex w-full h-screen">
+      <LeftPanel
+        itemCount={itemCount}
+        setItemCount={setItemCount}
+        setUsers={setUsers}
+      />
+      <div className="w-2/3 p-4 overflow-y-auto border-[1px]">
         <Routes>
           <Route
             path="/UsingListVirtualization"

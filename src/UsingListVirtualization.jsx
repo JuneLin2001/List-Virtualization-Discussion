@@ -1,35 +1,16 @@
 import PropTypes from "prop-types";
 import { FixedSizeList as List } from "react-window";
-import { useRef, useEffect, useState } from "react";
+import AutoSizer from "react-virtualized-auto-sizer";
 import memoize from "memoize-one";
 
 const UsingListVirtualization = ({ itemCount, Row, users }) => {
-  const listRef = useRef();
-  const [height, setHeight] = useState(0);
-
   const createUserData = memoize((users) => users);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (listRef.current) {
-        setHeight(listRef.current.clientHeight);
-      }
-    };
-
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-    };
-  }, []);
-
   const memoizedUsers = createUserData(users);
 
   return (
-    <div className="h-full w-full" ref={listRef}>
-      {height > 0 && (
-        <List height={height} itemCount={itemCount} itemSize={64} width="100%">
+    <AutoSizer>
+      {({ height, width }) => (
+        <List height={height} itemCount={itemCount} itemSize={64} width={width}>
           {({ index, style }) => (
             <div style={style}>
               <Row
@@ -41,7 +22,7 @@ const UsingListVirtualization = ({ itemCount, Row, users }) => {
           )}
         </List>
       )}
-    </div>
+    </AutoSizer>
   );
 };
 
