@@ -7,6 +7,10 @@ List Virtualization Discussion 是一個用於演示「列表虛擬化 (List Vir
 - 使用 List Virtualization: 只渲染可見範圍內的列表項，減少 DOM 節點數量，提升性能。
 - 不使用 List Virtualization: 渲染整個列表，適合數據量較少的場景。
 
+### 測試你裝置的最大顯示高度 & 寬度
+- 透過簡單的繪製正方形功能，並輸入一個超大的值（如100000000px），看實際大小會是幾px。
+> [測試網站連結](https://junelin2001.github.io/List-Virtualization-Discussion/square.html)
+
 ## Built With
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
