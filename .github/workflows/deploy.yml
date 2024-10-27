@@ -25,11 +25,14 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Include square.html in dist
+        run: cp square.html dist/
+
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
         with:
           name: production-files
-          path: "dist \n square.html"
+          path: dist
 
   deploy:
     name: Deploy
