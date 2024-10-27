@@ -29,12 +29,10 @@
         const squareWidthDisplay = document.getElementById("squareWidth");
 
         if (size > 0) {
-          // 設置正方形的寬度和高度
           square.style.width = size + "px";
           square.style.height = size + "px";
           square.style.display = "block";
 
-          // 確保瀏覽器已經渲染出新的正方形尺寸
           setTimeout(() => {
             const actualWidth = square.offsetWidth;
             squareWidthDisplay.textContent = `${actualWidth}px`;
