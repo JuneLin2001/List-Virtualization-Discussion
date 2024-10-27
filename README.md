@@ -46,4 +46,5 @@ Start the project
 
  - [Can React alone render 1 million rows?](https://www.youtube.com/watch?v=1JoEuJQIJbs&t=94s)
  - [React-window | 有效地呈現大型列表與表格](https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/virtualize-long-list-with-react-window-95bac3673a91)
+ - [List Virtualization 介紹簡報](https://www.canva.com/design/DAGUWL0H-js/HIE6OZP35tQggxqQCCLNEQ/view?utm_content=DAGUWL0H-js&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
